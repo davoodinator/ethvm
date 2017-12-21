@@ -16,99 +16,99 @@
               <tbody>                
                 <tr>
                   <td>Height</td>
-                  <td>{{common.HexNumber(block.getNumber()).toNumber()}}</td>
+                  <td>{{block.getNumber().toNumber()}}</td>
                 </tr>                
                 <tr>
                   <td>Logs</td>
-                  <td>{{block.getLogsBloom().length}}</td>
+                  <td>{{block.getLogsBloom().toString()}}</td>
                 </tr>
                 <tr>
                   <td>Timestamp</td>
-                  <td>{{common.HexNumber(block.getNumber()).toNumber()}}</td>
+                  <td>{{block.getNumber().toString()}}</td>
                 </tr>
                 <tr>
                   <td>Transactions</td>
-                  <td>{{block.getTransactions().length}}</td>
+                  <td>{{block.getTransactionCount()}}</td>
                 </tr>
                 <tr>
                   <td>Hash</td>
-                  <td>{{block.getHash()}}</td>
+                  <td>{{block.getHash().toString()}}</td>
                 </tr>
                 <tr>
                   <td>Parent Hash</td>
-                  <td>{{block.getParentHash()}}</td>
+                  <td>{{block.getParentHash().toString()}}</td>
                 </tr>
                 <tr>
                   <td>Uncles Hash</td>
-                  <td>{{block.getSha3Uncles()}}</td>
+                  <td>{{block.getSha3Uncles().toString()}}</td>
                 </tr>
                 <tr>
                   <td>Miner</td>
-                  <td>{{block.getMiner()}}</td>
+                  <td>{{block.getMiner().toString()}}</td>
                 </tr>
                 <tr>
                   <td>Nonce</td>
-                  <td>{{block.getNonce()}}</td>
+                  <td>{{block.getNonce().toString()}}</td>
                 </tr>
                 
                 <tr>
                   <td>State Root</td>
-                  <td>{{block.getStateRoot()}}</td>
+                  <td>{{block.getStateRoot().toString()}}</td>
                 </tr>
                 <tr>
                   <td>Extra Data</td>
-                  <td>{{block.getExtraData()}}</td>
+                  <td>{{block.getExtraData().toString()}}</td>
                 </tr>
                 <tr>
                   <td>Size</td>
-                  <td>{{block.getSize()}}</td>
+                  <td>{{block.getSize().toNumber()}}</td>
                 </tr>
                 <tr>
                   <td>Gas Limit</td>
-                  <td>{{block.getGasLimit()}}</td>
+                  <td>{{block.getGasLimit().toNumber()}}</td>
                 </tr>
                 <tr>
                   <td>Gas Used</td>
-                  <td>{{block.getGasUsed()}}</td>
+                  <td>{{block.getGasUsed().toNumber()}}</td>
                 </tr>
                 
 
                 <tr>
                   <td>Transactions Root</td>
-                  <td>{{block.getTransactionsRoot()}}</td>
+                  <td>{{block.getTransactionsRoot().toString()}}</td>
                 </tr>
 
                 <tr>
                   <td>Receipts Root</td>
-                  <td>{{block.getReceiptsRoot()}}</td>
+                  <td>{{block.getReceiptsRoot().toString()}}</td>
                 </tr>
 
                 <tr>
                   <td>TX Fees</td>
-                  <td>{{block.getTxFees()}}</td>
+                  <td>{{block.getTxFees().toEth()}} ETH</td>
                 </tr>
 
                 <tr>
                   <td>Block Reward</td>
-                  <td>{{block.getBlockReward()}}</td>
+                  <td>{{block.getBlockReward().toEth()}} ETH</td>
                 </tr>
 
 
                 <tr>
                   <td>Total BlockReward</td>
-                  <td>{{block.getTotalBlockReward()}}</td>
+                  <td>{{block.getTotalBlockReward().toEth()}} ETH</td>
                 </tr>
                 <tr>
                   <td>SHA3 Uncles</td>
-                  <td>{{block.getSha3Uncles()}}</td>
+                  <td>{{block.getSha3Uncles().toString()}}</td>
                 </tr>
                 <tr>
                   <td>Difficulty</td>
-                  <td>{{block.getDifficulty()}}</td>
+                  <td>{{block.getDifficulty().toNumber()}}</td>
                 </tr>
                 <tr>
                   <td>Total Difficulty</td>
-                  <td>{{block.getTotalDifficulty()}}</td>
+                  <td>{{block.getTotalDifficulty().toNumber()}}</td>
                 </tr>
 
 
@@ -123,13 +123,13 @@
 
         <div class="col-md-12 hidden">
           <div class="section-block">
-            <p class="title">Height {{common.HexNumber(block.getNumber()).toNumber()}}</p>
-            <p class="title">Timestamp {{common.HexNumber(block.getNumber()).toNumber()}}</p>
-            <p class="title">Transactions {{block.getTransactions().length}}</p>
-            <p class="title">Hash {{block.getHash()}}</p>
-            <p class="title">Parent Hash {{block.getParentHash()}}</p>
-            <p class="title">Uncles Hash {{block.getSha3Uncles()}}</p>
-            <p class="title">Miner {{block.getMiner()}}</p>
+            <p class="title">Height {{block.getNumber().toNumber()}}</p>
+            <p class="title">Timestamp {{block.getNumber().toString()}}</p>
+            <p class="title">Transactions {{block.getTransactionCount()}}</p>
+            <p class="title">Hash {{block.getHash().toString()}}</p>
+            <p class="title">Parent Hash {{block.getParentHash().toString()}}</p>
+            <p class="title">Uncles Hash {{block.getSha3Uncles().toString()}}</p>
+            <p class="title">Miner {{block.getMiner().toString()}}</p>
           </div>
         </div>
 
@@ -158,11 +158,8 @@ export default Vue.extend({
   methods: {},
   mounted: function () {
     let _this = this
-    this.$socket.emit('getBlock', this.$route.params.hash, (data) => {
+    this.$socket.emit('getBlock', Buffer.from(this.$route.params.hash.substring(2), 'hex'), (data) => {
       if (data) _this.block = new Block(data)
-    })
-    this.$socket.emit('getTx', '0X97FBCBA8B77F6726AFED5A1DB6A85D4417F50DBC53F82BBC61CE7938C1B7A5BE', (data) => {
-      console.log(data)
     })
     console.log('Page is fully loaded!!!')
   }
