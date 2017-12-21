@@ -161,6 +161,9 @@ export default Vue.extend({
     this.$socket.emit('getBlock', this.$route.params.hash, (data) => {
       if (data) _this.block = new Block(data)
     })
+    this.$socket.emit('getTx', '0X97FBCBA8B77F6726AFED5A1DB6A85D4417F50DBC53F82BBC61CE7938C1B7A5BE', (data) => {
+      console.log(data)
+    })
     console.log('Page is fully loaded!!!')
   }
 })
