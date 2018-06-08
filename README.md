@@ -18,8 +18,7 @@
 
 <div align="center">
   <h1>
-    <img width="100%" heigth="100%" src="https://raw.githubusercontent.com/enKryptIO/ethvm/master/assets/logo.png" alt="ethvm-logo">
-    <p>EthVM</p>
+    <img src="https://raw.githubusercontent.com/enKryptIO/ethvm/master/assets/logo.png" alt="ethvm-logo">
   </h1>
 </div>
 
