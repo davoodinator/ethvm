@@ -27,8 +27,7 @@
         }
       }
     }
-  })
-</script>
+  })</script>
 
 <style scoped="" lang="less">
 

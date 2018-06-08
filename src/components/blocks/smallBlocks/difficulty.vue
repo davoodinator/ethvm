@@ -35,8 +35,7 @@
         sEvents.newBlock
       ])
     }
-  })
-</script>
+  })</script>
 
 <style scoped="" lang="less">
 

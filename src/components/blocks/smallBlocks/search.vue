@@ -32,8 +32,7 @@ export default Vue.extend({
 
   }
 
-})
-</script>
+})</script>
 <style scoped lang="less">
 @import "~lessPath/sunil/blocks/smallBlocks/search.less";
 </style>

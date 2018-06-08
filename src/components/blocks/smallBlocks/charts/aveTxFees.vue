@@ -117,6 +117,4 @@ export default Vue.extend({
   mounted: function(){
   }
 
-})
-
-</script>
+})</script>

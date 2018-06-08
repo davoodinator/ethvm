@@ -1,7 +1,7 @@
 <template>
   <div id="block">
     <div class="container">
-      
+
       <div class="page-title-container">
         <div class="page-title">
           <h3>Block Detail</h3>
@@ -13,7 +13,6 @@
         </div>
       </div>
 
-      
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="block-title-container">
@@ -32,23 +31,20 @@
           </div>
         </div>
       </div>
-      
 
     </div>
   </div>
 </template>
 
-
 <script lang="ts">
-import Vue from 'vue';
-import store from '@/states';
-import chartOptions from '@/sampleData/chartData.json';
-import { Block, common, Tx } from '@/libs';
+import Vue from 'vue'
+import store from '@/states'
+import chartOptions from '@/sampleData/chartData.json'
+import { Block, common, Tx } from '@/libs'
+
 export default Vue.extend({
   name: 'Block',
-  props: [
-    'blockHash'
-  ],
+  props: ['blockHash'],
   data() {
     return {
       store: store,
@@ -64,39 +60,31 @@ export default Vue.extend({
   methods: {},
   computed: {
     isUncle() {
-      if (this.block && this.block.getIsUncle()) {
-        return true
-      } else {
-        return false
-      }
+      return this.block && this.block.getIsUncle()
     }
   },
   mounted: function() {
-    let _this = this
     this.$socket.emit('getBlock', Buffer.from(this.blockHash.substring(2), 'hex'), (err, data) => {
       if (data) {
-        _this.block = new Block(data)
+        this.block = new Block(data)
 
-        let uncleHashes = _this.block.getUncleHashes()
-        _this.$socket.emit('getBlockTransactions', _this.block.getHash().toBuffer(), (err, data) => {
-          _this.transactions = data.map((_tx) => {
+        let uncleHashes = this.block.getUncleHashes()
+        this.$socket.emit('getBlockTransactions', this.block.getHash().toBuffer(), (err, data) => {
+          this.transactions = data.map(_tx => {
             return new Tx(_tx)
           })
         })
         uncleHashes.forEach((_hash: any, idx: number) => {
-          _this.$socket.emit('getBlock', _hash.toBuffer(), (err, data) => {
-            _this.uncles.push(new Block(data))
+          this.$socket.emit('getBlock', _hash.toBuffer(), (err, data) => {
+            this.uncles.push(new Block(data))
           })
         })
       }
     })
-
   }
-
 })
-
 </script>
 
 <style scoped lang="less">
-  @import "~lessPath/sunil/frames/blockDetail.less";
+@import '~lessPath/sunil/frames/blockDetail.less';
 </style>

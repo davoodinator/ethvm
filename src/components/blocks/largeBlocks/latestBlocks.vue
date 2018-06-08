@@ -127,8 +127,7 @@ export default Vue.extend({
     mounted() {
 
     }
-})
-</script>
+})</script>
 <style scoped="" lang="less">
 @import "~lessPath/sunil/blocks/largeBlocks/latestBlocks.less";
 </style>

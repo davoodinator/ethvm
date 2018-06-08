@@ -48,9 +48,7 @@
       'transactions'
     ],
     created() {}
-  })
-
-</script>
+  })</script>
 
 <style scoped lang="less">
   @import "~lessPath/sunil/blocks/largeBlocks/lastTransactions.less";

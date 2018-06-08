@@ -1,7 +1,7 @@
 <template>
   <div id="home">
     <div class="container">
-      
+
       <div class="page-title-container">
         <div class="page-title">
           <h3>Blocks</h3>
@@ -20,7 +20,6 @@
         <div class="col-md-3"><block-difficulty></block-difficulty></div>
       </div>
 
-
       <div class="row">
         <div class="col-md-12 table-data ">
           <div class="latest-blocks-header">
@@ -29,7 +28,7 @@
             <li>TXs</li>
             <li>Reward</li>
           </div>
-          
+
           <div class="latest-blocks-data">
             <block-latest-blocks :max-items="20"></block-latest-blocks>
           </div>
@@ -41,7 +40,7 @@
             </ul>
           </div>
         </div>
-        
+
       </div>
 
     </div>
@@ -49,23 +48,24 @@
 </template>
 
 <script lang="ts">
-  import Vue from 'vue'
-  const MAX_ITEMS = 20
-  export default Vue.extend({
-    name: 'FramesHome',
-    data () {
-      return {}
-    },
-    created (){},
-    computed:{
-      txs(){
-          if(this.$store.getters.getTxs.length) return this.$store.getters.getTxs.slice(0, MAX_ITEMS)
-          else return []
-      }
+import Vue from 'vue'
+const MAX_ITEMS = 20
+
+export default Vue.extend({
+  name: 'FramesHome',
+  data() {
+    return {}
+  },
+  created() {},
+  computed: {
+    txs() {
+      if (this.$store.getters.getTxs.length) return this.$store.getters.getTxs.slice(0, MAX_ITEMS)
+      else return []
     }
-  })
+  }
+})
 </script>
 
 <style scoped lang="less">
-  @import "~lessPath/sunil/frames/blocks.less";
+@import '~lessPath/sunil/frames/blocks.less';
 </style>

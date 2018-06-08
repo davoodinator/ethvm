@@ -82,8 +82,7 @@
       return {
       }
     }
-  })
-</script>
+  })</script>
 
 <style scoped lang="less">
   @import "~lessPath/sunil/blocks/largeBlocks/about.less";

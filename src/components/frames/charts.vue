@@ -1,7 +1,6 @@
 <template>
   <div id="charts">
     <div class="container">
-      
 
       <div class="page-title-container">
         <div class="page-title">
@@ -14,10 +13,6 @@
         </div>
       </div>
 
-
-
-
-      
       <div id="exTab1">
         <ul class="nav-p">
           <li v-on:click="nav1on" v-bind:class="{ active: nav1 }">General</li>
@@ -25,23 +20,22 @@
           <li v-on:click="nav3on" v-bind:class="{ active: nav3 }">Network History</li>
           <li v-on:click="nav4on" v-bind:class="{ active: nav4 }">Mining History</li>
         </ul>
-        
 
         <div class="tab-content">
-          <div v-if="nav1 === true" class="">            
-            
+          <div v-if="nav1 === true" class="">
+
             <div class="row">
-               <div class="col-md-12">
+              <div class="col-md-12">
                 <top-miners-chart></top-miners-chart>
               </div>
             </div>
 
             <div class="row">
-               <div class="col-md-6">
+              <div class="col-md-6">
                 <div class="block-title-container-desc">
                   <h4>Block Time</h4>
                 </div>
-                 <account-created-chart></account-created-chart>  
+                <account-created-chart></account-created-chart>
               </div>
               <div class="col-md-6">
                 <div class="block-title-container-desc">
@@ -111,10 +105,9 @@
               </div>
             </div>
 
-
           </div>
           <div v-if="nav3 === true" class="">
-            
+
             <div class="row">
               <div class="col-md-6">
                 <div class="block-title-container-desc">
@@ -156,8 +149,6 @@
 
           </div>
           <div v-if="nav4 === true" class="">
-            
-
 
           </div>
         </div>
@@ -169,57 +160,57 @@
 </template>
 
 <script lang="ts">
-  import Vue from 'vue'
-  const MAX_ITEMS = 20
-  export default Vue.extend({
-    name: 'FramesCharts',
-    data () {
-      return {
-        nav1 : true,
-        nav2 : false,
-        nav3 : false,
-        nav4 : false
-      }
-    },
-    created (){},
-    computed:{
-      txs(){
-          if(this.$store.getters.getTxs.length) return this.$store.getters.getTxs.slice(0, MAX_ITEMS)
-          else return []
-      }
-    },
-    methods:{
-      alloff(){
-        this.nav1 = false
-        this.nav2 = false
-        this.nav3 = false
-        this.nav4 = false
-      },
+import Vue from 'vue'
+const MAX_ITEMS = 20
 
-      nav1on(){
-        this.alloff()
-        this.nav1 = true
-      },
-
-      nav2on(){
-        this.alloff()
-        this.nav2 = true
-      },
-
-      nav3on(){
-        this.alloff()
-        this.nav3 = true
-      },
-
-      nav4on(){
-        this.alloff()
-        this.nav4 = true
-      }
-
+export default Vue.extend({
+  name: 'FramesCharts',
+  data() {
+    return {
+      nav1: true,
+      nav2: false,
+      nav3: false,
+      nav4: false
     }
-  })
+  },
+  created() {},
+  computed: {
+    txs() {
+      if (this.$store.getters.getTxs.length) return this.$store.getters.getTxs.slice(0, MAX_ITEMS)
+      else return []
+    }
+  },
+  methods: {
+    alloff() {
+      this.nav1 = false
+      this.nav2 = false
+      this.nav3 = false
+      this.nav4 = false
+    },
+
+    nav1on() {
+      this.alloff()
+      this.nav1 = true
+    },
+
+    nav2on() {
+      this.alloff()
+      this.nav2 = true
+    },
+
+    nav3on() {
+      this.alloff()
+      this.nav3 = true
+    },
+
+    nav4on() {
+      this.alloff()
+      this.nav4 = true
+    }
+  }
+})
 </script>
 
 <style scoped lang="less">
-  @import "~lessPath/sunil/frames/charts.less";
+@import '~lessPath/sunil/frames/charts.less';
 </style>

@@ -6,19 +6,19 @@ import HomeRouter from '@/components/index.vue'
 Vue.use(Router)
 
 export default new Router({
-    routes: [
-        {
-            path: '/',
-            component: HomeRouter
-        },
-        {
-            path: '/:pageName',
-            component: HomeRouter
-        },
-        {
-            path: '/:pageName/:param',
-            component: HomeRouter
-        }
-    ],
-    mode: 'history'
+  routes: [
+    {
+      path: '/',
+      component: HomeRouter
+    },
+    {
+      path: '/:pageName',
+      component: HomeRouter
+    },
+    {
+      path: '/:pageName/:param',
+      component: HomeRouter
+    }
+  ],
+  mode: 'history'
 })

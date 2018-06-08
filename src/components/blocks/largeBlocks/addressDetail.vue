@@ -63,9 +63,7 @@ import NumberFormatter from 'number-formatter'
       return NumberFormatter("#,##0.#####",_this.account.ethusd)  
     }
   }
-})
-
-</script>
+})</script>
 
 
 

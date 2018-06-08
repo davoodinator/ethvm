@@ -83,28 +83,20 @@
     <!-- container -->
   </div>
 </template>
-<script lang="ts">
-import Vue from 'vue';
-import bn from 'bignumber.js';
-import {
-  common,
-  Tx
-} from '@/libs';
-import ethUnits from 'ethereumjs-units'
-var utils = require("../../libs/utils.js")
 
+<script lang="ts">
+import Vue from 'vue'
+import bn from 'bignumber.js'
+import { common, Tx } from '@/libs'
+import ethUnits from 'ethereumjs-units'
+var utils = require('../../libs/utils.js')
 
 let Account = require('ethereumjs-account')
 
 const MAX_ITEMS = 20
 export default Vue.extend({
   name: 'FrameAccount',
-  props: [
-    'address',
-    'totalTxs',
-    'tokens',
-    'txs'
-  ],
+  props: ['address', 'totalTxs', 'tokens', 'txs'],
   data() {
     return {
       account: {
@@ -124,26 +116,22 @@ export default Vue.extend({
       nav5: false,
 
       tokensLoaded: false,
-      tokenError: false,
-
+      tokenError: false
     }
   },
   created() {
-    var _this = this;
+    var _this = this
     this.$socket.emit('getBalance', this.address, (err, result) => {
       console.log(err, result)
       if (!err && result) {
         let balance = common.EthValue(common.HexToBuffer(result.result)).toEth()
         _this.account.balance = balance
-        console.log("account balance in eth: " + _this.account.balance)
+        console.log('account balance in eth: ' + _this.account.balance)
 
         ethtousd().then(function(resp) {
-          console.log("price: " + resp[0].price_usd)
+          console.log('price: ' + resp[0].price_usd)
           _this.account.ethusd = resp[0].price_usd
         })
-
-
-
       }
     })
 
@@ -151,31 +139,26 @@ export default Vue.extend({
       console.log(err, result)
       //_this.account.tokens = utils.decode(result.result)
       console.log(_this.account.tokens)
-      if (result.result !="0x") {
+      if (result.result != '0x') {
         _this.account.tokens = utils.decode(result.result)
         _this.tokensLoaded = true
-      }
-      else {
+      } else {
         _this.tokenError = true
       }
     })
 
     this.$socket.emit('getTotalTxs', this.address, (err, result) => {
       console.log(err, result)
-      _this.account.totalTxs = result;
-
+      _this.account.totalTxs = result
     })
 
     this.$socket.emit('getTxs', this.address, (err, result) => {
-      var txs = [];
+      var txs = []
       result.forEach(element => {
         txs.push(new Tx(element))
-      });
-      _this.account.txs = txs;
+      })
+      _this.account.txs = txs
     })
-
-
-
   },
   methods: {
     alloff() {
@@ -217,12 +200,11 @@ export default Vue.extend({
     //     else return []
     // }
   }
-
 })
 
 async function ethtousd() {
-  const response = await fetch("https://api.coinmarketcap.com/v1/ticker/ethereum/", {
-    // mode: 'cors', 
+  const response = await fetch('https://api.coinmarketcap.com/v1/ticker/ethereum/', {
+    // mode: 'cors',
     // headers: new Headers({
     //  'Content-Type': 'text/plain'
     // })
@@ -231,6 +213,7 @@ async function ethtousd() {
   return parsedResponse
 }
 </script>
+
 <style scoped="" lang="less">
-@import "~lessPath/sunil/frames/address.less";
+@import '~lessPath/sunil/frames/address.less';
 </style>

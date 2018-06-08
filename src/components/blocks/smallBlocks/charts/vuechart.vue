@@ -105,8 +105,7 @@ export default Vue.extend({
   beforeDestroy () {
     this.chart.destroy()
   }
-})
-</script>
+})</script>
 
 
 <style scoped lang="less">

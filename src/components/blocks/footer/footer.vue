@@ -32,7 +32,7 @@
           </div>
 
           <div class="input-block hidden">
-            
+
             <h5>Connect With Us</h5>
 
             <!-- Begin MailChimp Signup Form -->
@@ -53,8 +53,6 @@
             </div>
 
             <!--End mc_embed_signup-->
-
-            
           </div>
 
           <div class="input-block donate">
@@ -64,8 +62,6 @@
           </div>
         </div>
       </div>
-
-
 
       <div class="copy-right-container">
         <div class="copy-right">
@@ -85,22 +81,22 @@
 </template>
 
 <script lang="ts">
-  import Vue from 'vue'
-  Vue.component('modal', {
-    template: '#modal-template'
-  })
-  export default Vue.extend({
-    data () {
-      return {
-        signup : false
-      }
-    },
-    methods: {
+import Vue from 'vue'
 
+Vue.component('modal', {
+  template: '#modal-template'
+})
+
+export default Vue.extend({
+  data() {
+    return {
+      signup: false
     }
-  })
+  },
+  methods: {}
+})
 </script>
 
 <style scoped lang="less">
-  @import "~lessPath/sunil/blocks/footer/footer.less";
+@import '~lessPath/sunil/blocks/footer/footer.less';
 </style>

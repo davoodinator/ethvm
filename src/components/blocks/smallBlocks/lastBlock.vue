@@ -21,8 +21,7 @@
         return this.$store.getters.getBlocks[0].getIntNumber()
       }
     }
-  })
-</script>
+  })</script>
 <style scoped="" lang="less">
   
 </style>

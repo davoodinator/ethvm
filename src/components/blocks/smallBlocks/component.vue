@@ -20,8 +20,7 @@
         return this.title.toLowerCase().replace(/\s/g, '').replace("/", "");
       }
     }
-  })
-</script>
+  })</script>
 <style scoped lang="less">
   @import "~lessPath/sunil/blocks/smallBlocks/component.less";
 </style>

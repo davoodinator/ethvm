@@ -54,8 +54,7 @@ export default Vue.extend({
   created (){},
   computed:{},
   methods: {}
-})
-</script>
+})</script>
 
 <style scoped="" lang="less">
   @import "~lessPath/sunil/blocks/largeBlocks/blockDetail.less";

@@ -1,7 +1,7 @@
 <template>
   <div id="tx-detail">
     <div class="container">
-      
+
       <!-- Title and Search Bar -->
       <div class="page-title-container">
         <div class="page-title">
@@ -43,20 +43,20 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import series from 'async/series';
-import bn from 'bignumber.js';
-import { common, Tx } from '@/libs';
-import axios from 'axios';
-import lists from '@/lists';
-let Account = require('ethereumjs-account')
-let balanceHex = '0x70a08231'
-import { txLayout } from '@/typeLayouts';
+import Vue from 'vue'
+import series from 'async/series'
+import bn from 'bignumber.js'
+import { common, Tx } from '@/libs'
+import axios from 'axios'
+import lists from '@/lists'
+import { txLayout } from '@/typeLayouts'
+
 let padLeft = (n, width, z) => {
   z = z || '0'
   n = n + ''
   return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n
 }
+
 let getDataObj = (to, func, arrVals) => {
   var val = ''
   for (var i = 0; i < arrVals.length; i++) {
@@ -67,11 +67,13 @@ let getDataObj = (to, func, arrVals) => {
     data: func + val
   }
 }
+
+let Account = require('ethereumjs-account')
+let balanceHex = '0x70a08231'
+
 export default Vue.extend({
   name: 'FrameAccount',
-  props: [
-    'address'
-  ],
+  props: ['address'],
   data() {
     return {
       account: {
@@ -84,33 +86,34 @@ export default Vue.extend({
   },
   created() {
     let _this = this
-    this.$socket.emit('getAddressTransactionPages', {
-      address: new Buffer(_this.address.substring(2), 'hex')
-    }, (err: Error, data: Array<txLayout>) => {
-      if (err) {
-        _this.$toasted.error(err.message)
-      } else {
-        _this.txs = data.map((_tx) => {
-          return new Tx(_tx)
-        })
+    this.$socket.emit(
+      'getAddressTransactionPages',
+      {
+        address: new Buffer(_this.address.substring(2), 'hex')
+      },
+      (err: Error, data: Array<txLayout>) => {
+        if (err) {
+          _this.$toasted.error(err.message)
+        } else {
+          _this.txs = data.map(_tx => {
+            return new Tx(_tx)
+          })
+        }
       }
-    }) 
+    )
     _this.$socket.emit('getAccount', _this.address, (err, result) => {
       console.log(err, result)
       if (!err && result) {
         let acc = new Account(new Buffer(result))
         _this.account.balance = common.EthValue(acc.balance)
-    
       }
     })
     let tokens = lists.tokens.ETH
     let counter = 0
     let reqArr = []
-    tokens.forEach((_token) => {
+    tokens.forEach(_token => {
       let to = _token.address.trim()
-      let data = getDataObj(to, balanceHex, [
-        common.AddressFromHex(_this.address.trim()).toNakedAddress()
-      ])
+      let data = getDataObj(to, balanceHex, [common.AddressFromHex(_this.address.trim()).toNakedAddress()])
       reqArr.push(data)
     })
     _this.$socket.emit('ethCall', reqArr, (err, result) => {
@@ -132,29 +135,31 @@ export default Vue.extend({
       let _this = this
       if (_this.txs.length) {
         this.busy = true
-        this.$socket.emit('getAddressTransactionPages', {
-          address: new Buffer(_this.address.substring(2), 'hex'),
-          hash: _this.txs[_this.txs.length - 1].getHash().toBuffer(),
-          number: _this.txs[_this.txs.length - 1].getBlockNumber().toIntNumber()
-        }, (err: Error, data: Array<txLayout>) => {
-          if (err) {
-            _this.$toasted.error(err.message)
-          } else {
-            data.forEach((_tx) => {
-              _this.txs.push(new Tx(_tx))
-            })
+        this.$socket.emit(
+          'getAddressTransactionPages',
+          {
+            address: new Buffer(_this.address.substring(2), 'hex'),
+            hash: _this.txs[_this.txs.length - 1].getHash().toBuffer(),
+            number: _this.txs[_this.txs.length - 1].getBlockNumber().toIntNumber()
+          },
+          (err: Error, data: Array<txLayout>) => {
+            if (err) {
+              _this.$toasted.error(err.message)
+            } else {
+              data.forEach(_tx => {
+                _this.txs.push(new Tx(_tx))
+              })
+            }
+            _this.busy = false
           }
-          _this.busy = false
-        })
+        )
       }
     }
   }
-
 })
-
 </script>
 
 <style scoped="" lang="less">
-@import "~lessPath/NewHome/Frames/FramesOverview.less";
+@import '~lessPath/NewHome/Frames/FramesOverview.less';
 </style>
 

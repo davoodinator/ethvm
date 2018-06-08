@@ -1,24 +1,26 @@
-import { stateLayout, txLayout } from '@/typeLayouts'
 import { Block, Tx } from '@/libs'
-let all = (state: stateLayout): stateLayout => {
-	return state
+import { stateLayout, txLayout } from '@/typeLayouts'
+
+const all = (state: stateLayout): stateLayout => {
+  return state
 }
 
-let getTxs = (state: stateLayout): Array<Tx> => {
-	return state.txs.items()
+const getTxs = (state: stateLayout): Tx[] => {
+  return state.txs.items()
 }
 
-let getBlocks = (state: stateLayout): Array<Block> => {
-	let blocks = []
-	state.blocks.items().forEach((block)=>{
-		if(!block.getIsUncle()) blocks.push(block)
-	})
-	return blocks
-
+const getBlocks = (state: stateLayout): Block[] => {
+  const blocks = []
+  state.blocks.items().forEach(block => {
+    if (!block.getIsUncle()) {
+      blocks.push(block)
+    }
+  })
+  return blocks
 }
 
 export default {
-	all,
-	getTxs,
-	getBlocks
+  all,
+  getTxs,
+  getBlocks
 }

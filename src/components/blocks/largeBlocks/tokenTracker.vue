@@ -104,8 +104,7 @@ export default Vue.extend({
     }
   }
 
-})
-</script>
+})</script>
 <style scoped="" lang="less">
 @import '~lessPath/sunil/blocks/largeBlocks/tokenTracker';
 </style>

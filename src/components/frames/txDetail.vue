@@ -1,7 +1,7 @@
 <template>
   <div id="tx-detail">
     <div class="container">
-      
+
       <div class="page-title-container">
         <div class="page-title">
           <h3>Transaction Details</h3>
@@ -12,7 +12,6 @@
         </div>
       </div>
 
-      
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="block-title-container">
@@ -22,7 +21,7 @@
             <block-tx-detail :tx="transaction" ></block-tx-detail>
           </div>
         </div>
-        <!-- Fix this - get sub tx 
+        <!-- Fix this - get sub tx
         <div class="col-md-12 col-sm-12 col-xs-12" >
           <div class="block-title-container">
             <h3>Sub Transactions</h3>
@@ -32,10 +31,7 @@
           </div>
         </div>
       -->
-
-
       </div>
-      
 
     </div>
   </div>
@@ -43,27 +39,25 @@
 
 
 <script lang="ts">
-import Vue from 'vue';
-import store from '@/states';
-import chartOptions from '@/sampleData/chartData.json';
-import { Block, common, Tx } from '@/libs';
+import Vue from 'vue'
+import store from '@/states'
+import chartOptions from '@/sampleData/chartData.json'
+import { Block, common, Tx } from '@/libs'
+
 export default Vue.extend({
   name: 'tx-Detail',
-  props: [
-    'txHash'
-  ],
+  props: ['txHash'],
   data() {
     return {
       store: store,
       transaction: null,
       common: common,
       unixtimestamp: null,
-      timestamp: null,
+      timestamp: null
     }
   },
   methods: {},
-  computed: {
-  },
+  computed: {},
   mounted: function() {
     let _this = this
     this.$socket.emit('getTx', Buffer.from(this.txHash.substring(2), 'hex'), (err, data) => {
@@ -73,13 +67,10 @@ export default Vue.extend({
         /* Method to get Subtransactions: */
       }
     })
-
   }
-
 })
-
 </script>
 
 <style scoped lang="less">
-  @import "~lessPath/sunil/frames/blockDetail.less";
+@import '~lessPath/sunil/frames/blockDetail.less';
 </style>
