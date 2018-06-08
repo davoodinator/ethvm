@@ -11,7 +11,8 @@
         "lint": "tslint --config tslint.json --project .",
         "lint:fix": "tslint --fix --config tslint.json --project .",
         "external": "ts-node --skip-project ./external/index.ts",
-        "build": "node build/build.js"
+        "build": "node build/build.js",
+        "docker-dev": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --progress --config build/webpack.dev.conf.js"
     },
     "dependencies": {
         "@types/socket.io-client": "^1.4.32",
