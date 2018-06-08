@@ -24,7 +24,7 @@
 
 # EthVM - Ethereum Blockchain Explorer
 
-Open source realtime blockchain explorer, powered by [Vue.js](https://github.com/vuejs/vue) / [go-ethereum](https://github.com/ethereum/go-ethereum) / [RethinkDB](https://github.com/rethinkdb/rethinkdb)/[Socket.io](https://github.com/socketio/socket.io) / [Redis](https://redis.io/topics/quickstart)
+Open source realtime blockchain explorer, powered by [Vue.js](https://github.com/vuejs/vue) / [go-ethereum](https://github.com/ethereum/go-ethereum) / [RethinkDB](https://github.com/rethinkdb/rethinkdb) / [Socket.io](https://github.com/socketio/socket.io) / [Redis](https://redis.io/topics/quickstart)
 
 ## Getting Started
 
@@ -112,7 +112,7 @@ $ make geth
 
 Make sure it builds without any problems.
 
-## Running
+### Running
 
 Set following environmental variables:
 
