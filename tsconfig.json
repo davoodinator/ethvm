@@ -12,7 +12,7 @@
       "allowJs": false,
       "baseUrl": ".",
       "paths": {
-	      "@/*": ["*"]
+        "@/*": ["src/*"]
 	    }
   }
 }

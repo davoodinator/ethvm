@@ -30,7 +30,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import sEvents from '@/configs/socketEvents.json'
-import { Tx, Block } from '@/libs'
+import {  Block, Tx } from '@/libs'
 
 export default Vue.extend({
   name: 'FramesMainFrame',
