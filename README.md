@@ -24,6 +24,8 @@
 
 # EthVM - Ethereum Blockchain Explorer
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/enKryptIO/ethvm.svg)](https://greenkeeper.io/)
+
 Open source realtime blockchain explorer, powered by [Vue.js](https://github.com/vuejs/vue) / [go-ethereum](https://github.com/ethereum/go-ethereum) / [RethinkDB](https://github.com/rethinkdb/rethinkdb) / [Socket.io](https://github.com/socketio/socket.io) / [Redis](https://redis.io/topics/quickstart)
 
 ## Getting Started
