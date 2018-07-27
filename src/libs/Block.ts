@@ -2,7 +2,7 @@ import { Address, common, EthValue, Hash, Hex, HexNumber, HexTime, Tx } from '@/
 import { BlockLayout } from '@/typeLayouts'
 import bn from 'bignumber.js'
 
-export default class Block {
+class Block {
   public readonly id: string
   private readonly block: BlockLayout
   private cache: any
@@ -224,4 +224,6 @@ export default class Block {
   }
 }
 
+
+export default Block
 

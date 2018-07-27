@@ -31,36 +31,33 @@
       -->
     </div>
   </div>
-  </div>
-  </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import store from '@/states'
-import chartOptions from '@/sampleData/chartData.json'
 import { Block, common, Tx } from '@/libs'
+import chartOptions from '@/sampleData/chartData.json'
+import store from '@/states'
+import Vue from 'vue'
 
 export default Vue.extend({
   name: 'tx-Detail',
   props: ['txHash'],
   data() {
     return {
-      store: store,
+      store,
+      common,
       transaction: null,
-      common: common,
       unixtimestamp: null,
       timestamp: null
     }
   },
   methods: {},
   computed: {},
-  mounted: function() {
+  mounted() {
     /* Get Tx Info */
-    let _this = this
     this.$socket.emit('getTx', Buffer.from(this.txHash.substring(2), 'hex'), (err, data) => {
       if (data) {
-        _this.transaction = new Tx(data)
+        this.transaction = new Tx(data)
         /* Method to get Subtransactions: */
       }
     })

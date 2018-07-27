@@ -10,10 +10,8 @@
           <block-search></block-search>
         </div>
       </div>
-
       <div class="row">
         <div class="col-md-12 table-data">
-
           <div class="last-transactions-header">
             <li>TXn#</li>
             <li class="eth">ETH</li>
@@ -21,11 +19,9 @@
             <li>WEI</li>
             <li></li>
           </div>
-
           <div class="last-transactions-data">
             <block-pending-txs :transactions="pendingTxs"></block-pending-txs>
           </div>
-
           <div class="footnote">
             <ul>
               <li><i class="fa fa-check success" aria-hidden="true"></i> Success</li>
@@ -34,27 +30,25 @@
           </div>
         </div>
       </div>
-
     </div><!-- .container -->
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
 import sEvents from '@/configs/socketEvents.json'
 import { Tx } from '@/libs'
-import Visibility from 'visibilityjs'
 import bn from 'bignumber.js'
-
-let getOverview = (arr: Array<Tx>) => {
-  let overview = {
+import Visibility from 'visibilityjs'
+import Vue from 'vue'
+const getOverview = (arr: Tx[]) => {
+  const overview = {
     totalGasPrice: new bn(0),
     totalValue: new bn(0),
     length: 0,
     totalFees: new bn(0),
     topSenders: []
   }
-  let senders = {}
+  const senders = {}
   arr.forEach((_tx: Tx) => {
     overview.totalGasPrice = overview.totalGasPrice.add(_tx.getGasPrice().toWei())
     overview.totalValue = overview.totalValue.add(_tx.getValue().toWei())
@@ -65,8 +59,8 @@ let getOverview = (arr: Array<Tx>) => {
       senders[_tx.getFrom().toString()] = new bn(_tx.getValue().toWei())
     }
   })
-  let tempArr = []
-  for (var add in senders) {
+  const tempArr = []
+  for (const add in senders) {
     if (senders.hasOwnProperty(add)) {
       tempArr.push({
         address: add,
@@ -74,9 +68,14 @@ let getOverview = (arr: Array<Tx>) => {
       })
     }
   }
-  tempArr.sort(function(a, b) {
-    if (a.value.gt(b.value)) return -1
-    else return 1
+  tempArr.sort((a, b) => {
+    if (a.value.gt(b.value))
+    {
+      return -1
+    }
+    else {
+      return 1
+    }
   })
   overview.length = arr.length
   overview.topSenders = tempArr.slice(0, 10)

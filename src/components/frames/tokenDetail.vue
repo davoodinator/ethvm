@@ -32,19 +32,15 @@
     </div>
   </div>
   <!-- container -->
-  </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import bn from 'bignumber.js'
 import { common, Tx } from '@/libs'
+import bn from 'bignumber.js'
+import Account from 'ethereumjs-account'
 import ethUnits from 'ethereumjs-units'
-
-var utils = require('../../libs/utils.js')
-
-let Account = require('ethereumjs-account')
-
+import Vue from 'vue'
+import utils from '../../libs/utils.js'
 const MAX_ITEMS = 20
 
 export default Vue.extend({
@@ -76,27 +72,28 @@ export default Vue.extend({
     }
   },
   created() {
-    var _this = this
     /* Get Transfers History: */
 
     /* If (holderPresent)
       Get Total Holders:
       Get Total Supply: */
 
-    if (!_this.holderPresent) {
-      var newTab = {
+    if (!this.holderPresent) {
+     const newTab = {
         id: 1,
         title: 'Holders List',
         isActive: false
       }
-      _this.tokenTabs.push(newTab)
+      this.tokenTabs.push(newTab)
     }
   },
   methods: {},
   computed: {
-    holderPresent() {
-      let _this = this
-      if (_this.holderAddr) return true
+    holderPresent: () => {
+      if (this.holderAddr)
+      {
+        return true
+      }
       return false
     }
   }

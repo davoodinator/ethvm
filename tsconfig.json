@@ -10,9 +10,9 @@
       "noImplicitAny": false,
       "noImplicitThis": false,
       "allowJs": false,
-      "baseUrl": ".",
+      "baseUrl": "src",
       "paths": {
-        "@/*": ["src/*"]
+        "@/*": ["*"],
 	    }
   }
 }

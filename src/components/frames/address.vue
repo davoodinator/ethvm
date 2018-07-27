@@ -78,12 +78,11 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import bn from 'bignumber.js'
 import { common, Tx } from '@/libs'
+import bn from 'bignumber.js'
 import ethUnits from 'ethereumjs-units'
-
-var utils = require('../../libs/utils.js')
+import Vue from 'vue'
+import utils from '../../libs/utils.js'
 const MAX_ITEMS = 20
 
 export default Vue.extend({
@@ -128,52 +127,49 @@ export default Vue.extend({
     }
   },
   created() {
-    var _this = this
+
     /* Geting Address Balance: */
     this.$socket.emit('getBalance', this.address, (err, result) => {
       if (!err && result) {
-        let balance = common.EthValue(common.HexToBuffer(result.result)).toEth()
-        _this.account.balance = balance
+       const balance = common.EthValue(common.HexToBuffer(result.result)).toEth()
+        this.account.balance = balance
       }
     })
     /* Getting Token Balances: */
     this.$socket.emit('getTokenBalance', this.address, (err, result) => {
-      if (result != '0x') {
-        console.log('tokens recieved', result)
-        _this.account.tokens = result
-        _this.tokensLoaded = true
-        console.log('tokens', _this.account.tokens)
+      if (result !== '0x') {
+        this.account.tokens = result
+        this.tokensLoaded = true
       } else {
-        _this.tokenError = true
+        this.tokenError = true
       }
     })
     /* Getting Total Number of Tx: */
     this.$socket.emit('getTotalTxs', this.address, (err, result) => {
-      _this.account.totalTxs = result
+      this.account.totalTxs = result
     })
     /*Getting USD Values: */
     this.$socket.emit('getTokenToUSD', [], (err, result) => {
-      _this.account.ethusd = result[0][1]
-      _this.usdValue.ETH.value = result[0][1]
+      this.account.ethusd = result[0][1]
+      this.usdValue.ETH.value = result[0][1]
     })
     /*Getting Address Transactions: */
     this.$socket.emit('getTxs', this.address, (err, result) => {
-      var txs = []
+      const txs = []
       result.forEach(element => {
         txs.push(new Tx(element))
       })
-      _this.account.txs = txs
+      this.account.txs = txs
     })
-    _this.setTabs()
+    this.setTabs()
     /*Getting Address Pending Transactions: */
     // Method here:
   },
   methods: {
     /*Checking of address is Miner? --> add new tab for the menu*/
-    setTabs() {
-      let _this = this
-      if (_this.account.isMiner) {
-        let newTab = {
+    setTabs: ()=> {
+      if (this.account.isMiner) {
+        const newTab = {
           id: 3,
           title: 'Mining History',
           isActive: false

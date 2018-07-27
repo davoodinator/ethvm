@@ -1,4 +1,6 @@
 {
-  "url": "http://ws.ethvm.lan",
-  "port": "80"
+  "purl": "http://localhost",
+    "url": "https://ws.ethvm.com",
+    "pport": "3000",
+    "port": "443"
 }
