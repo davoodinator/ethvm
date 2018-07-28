@@ -29,8 +29,7 @@ export default Vue.extend({
     return {
       searchFocus: false
     }
-  },
-  mounted() {}
+  }
 })
 </script>
 

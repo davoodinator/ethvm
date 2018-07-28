@@ -3,10 +3,9 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
 import sEvents from '@/configs/socketEvents.json'
 import BN from 'bignumber.js'
-
+import Vue from 'vue'
 export default Vue.extend({
   name: 'ShortDataLastBlock',
   data() {
@@ -21,8 +20,8 @@ export default Vue.extend({
       if (!this.$store.getters.getBlocks[0]) {
         return 'Loading'
       } else {
-        let newBlockStat = this.$store.getters.getBlocks[0].getStats()
-        let successfull = new BN(newBlockStat.success).toNumber()
+        const newBlockStat = this.$store.getters.getBlocks[0].getStats()
+        const successfull = new BN(newBlockStat.success).toNumber()
         return successfull
       }
     }

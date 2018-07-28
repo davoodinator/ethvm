@@ -3,10 +3,11 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
 import sEvents from '@/configs/socketEvents.json'
 import bn from 'bignumber.js'
-let getTHs = (_num: string): number => {
+import Vue from 'vue'
+
+const getTHs = (_num: string): number => {
   return new bn(_num)
     .div('1e12')
     .round(2)
@@ -20,7 +21,7 @@ export default Vue.extend({
       blockTitle: 'Difficulty TH',
       blockIconType: 'asterisk',
       blockIconColor: '#6bee69',
-      difficulty: '0.0'
+      difficulty: 0.0
     }
   },
   created() {
